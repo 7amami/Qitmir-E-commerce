@@ -1,28 +1,16 @@
 'use client';
 
 import PageContainer from '@/components/layout/page-container';
-import { OrganizationList } from '@clerk/nextjs';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { workspacesInfoContent } from '@/config/infoconfig';
 
 export default function WorkspacesView() {
   return (
-    <PageContainer
-      pageTitle='Workspaces'
-      pageDescription='Manage your workspaces and switch between them'
-      infoContent={workspacesInfoContent}
-    >
-      <OrganizationList
-        appearance={{
-          elements: {
-            organizationListBox: 'space-y-2',
-            organizationPreview: 'rounded-lg border p-4 hover:bg-accent',
-            organizationPreviewMainIdentifier: 'text-lg font-semibold',
-            organizationPreviewSecondaryIdentifier: 'text-sm text-muted-foreground'
-          }
-        }}
-        afterSelectOrganizationUrl='/dashboard/workspaces/team'
-        afterCreateOrganizationUrl='/dashboard/workspaces/team'
-      />
+    <PageContainer pageTitle='Workspaces' pageDescription='Your personal workspace' infoContent={workspacesInfoContent}>
+      <Card>
+        <CardHeader><CardTitle>Personal Workspace</CardTitle></CardHeader>
+        <CardContent className='text-muted-foreground'>Organization switching and team accounts are disabled in this single-user dashboard.</CardContent>
+      </Card>
     </PageContainer>
   );
 }
