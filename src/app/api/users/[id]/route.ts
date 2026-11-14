@@ -22,9 +22,6 @@ export async function PUT(request: NextRequest, { params }: Params) {
 }
 
 export async function DELETE(request: NextRequest, { params }: Params) {
-  const { userId } = await auth();
-  if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-
   const { id } = await params;
   const data = await fakeUsers.deleteUser(Number(id));
 
