@@ -76,9 +76,10 @@ export default function CommerceERPPage() {
     e.preventDefault();
     const p = data.products.find((x) => x.id === form.productId);
     if (!form.customer?.trim() || !p || Number(form.quantity) < 1) return;
+    if (Number(form.quantity) > p.stock) { window.alert("الكمية المطلوبة أكبر من المخزون المتاح."); return; }
     const quantity = Number(form.quantity);
     const order: Order = { id: "QT-" + Date.now().toString().slice(-7), customer: form.customer.trim(), phone: form.phone || "", wilaya: form.wilaya || "", productId: p.id, productName: p.name, quantity, unitPrice: Number(form.unitPrice || p.price), unitCost: p.cost, deliveryCost: Number(form.deliveryCost) || 0, packagingCost: Number(form.packagingCost) || 0, status: form.status || "جديد", payment: form.payment || "غير مدفوع", date: form.date || today(), note: form.note || "" };
-    setData((d) => ({ ...d, orders: [order, ...d.orders], products: d.products.map((x) => x.id === p.id ? { ...x, stock: Math.max(0, x.stock - quantity) } : x) }));
+    setData((d) => ({ ...d, orders: [order, ...d.orders], products: d.products.map((x) => x.id === p.id && !["ملغى", "مرتجع"].includes(order.status) ? { ...x, stock: Math.max(0, x.stock - quantity) } : x) }));
     closeModal();
   };
   const addSupplier = (e: FormEvent) => {
@@ -87,7 +88,19 @@ export default function CommerceERPPage() {
     setData((d) => ({ ...d, suppliers: [{ id: id(), name: form.name.trim(), phone: form.phone || "", contact: form.contact || "", note: form.note || "" }, ...d.suppliers] }));
     closeModal();
   };
-  const updateOrder = (orderId: string, patch: Partial<Order>) => setData((d) => ({ ...d, orders: d.orders.map((o) => o.id === orderId ? { ...o, ...patch } : o) }));
+  const updateOrder = (orderId: string, patch: Partial<Order>) => setData((d) => {
+    const current = d.orders.find((o) => o.id === orderId);
+    if (!current) return d;
+    const nextStatus = patch.status ?? current.status;
+    const wasClosed = ["ملغى", "مرتجع"].includes(current.status);
+    const isClosed = ["ملغى", "مرتجع"].includes(nextStatus);
+    const stockDelta = wasClosed === isClosed ? 0 : (isClosed ? current.quantity : -current.quantity);
+    return {
+      ...d,
+      orders: d.orders.map((o) => o.id === orderId ? { ...o, ...patch } : o),
+      products: stockDelta === 0 ? d.products : d.products.map((p) => p.id === current.productId ? { ...p, stock: Math.max(0, p.stock + stockDelta) } : p)
+    };
+  });
   const deleteItem = (collection: keyof StoreData, itemId: string) => {
     if (!window.confirm("هل تريد حذف هذا السجل نهائياً؟")) return;
     setData((d) => ({ ...d, [collection]: d[collection].filter((x) => x.id !== itemId) }));
