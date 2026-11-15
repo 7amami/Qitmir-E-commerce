@@ -10,90 +10,25 @@ import NextTopLoader from 'nextjs-toploader';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import '../styles/globals.css';
 
-const META_THEME_COLORS = {
-  light: '#ffffff',
-  dark: '#09090b'
-};
-
+const META_THEME_COLORS = { light: '#ffffff', dark: '#09090b' };
 export const metadata: Metadata = {
-  ...(process.env.NEXT_PUBLIC_APP_URL
-    ? { metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL) }
-    : {}),
-  title: {
-    default: 'Shadcn Dashboard - Next.js Admin Dashboard Template',
-    template: '%s | Shadcn Dashboard'
-  },
-  description:
-    'Free, open source admin dashboard starter built with Next.js 16, shadcn/ui, Tailwind CSS, and TypeScript.',
-  openGraph: {
-    title: 'Shadcn Dashboard - Next.js Admin Dashboard Template',
-    description:
-      'Free, open source admin dashboard starter built with Next.js 16, shadcn/ui, Tailwind CSS, and TypeScript.',
-    siteName: 'Shadcn Dashboard',
-    type: 'website',
-    images: [
-      {
-        url: '/shadcn-dashboard.png',
-        width: 3200,
-        height: 1600,
-        alt: 'Shadcn Dashboard overview page'
-      }
-    ]
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Shadcn Dashboard - Next.js Admin Dashboard Template',
-    description:
-      'Free, open source admin dashboard starter built with Next.js 16, shadcn/ui, Tailwind CSS, and TypeScript.',
-    images: ['/shadcn-dashboard.png']
-  }
+  title: { default: 'Qitmir | إدارة التجارة الإلكترونية', template: '%s | Qitmir' },
+  description: 'نظام إدارة التجارة الإلكترونية والطلبات والمخزون والمصاريف والأرباح.',
+  robots: { index: false, follow: false }
 };
-
-export const viewport: Viewport = {
-  themeColor: META_THEME_COLORS.light
-};
-
+export const viewport: Viewport = { themeColor: META_THEME_COLORS.light };
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const cookieStore = await cookies();
   const activeThemeValue = cookieStore.get('active_theme')?.value;
-  const isValidTheme = THEMES.some((t) => t.value === activeThemeValue);
-  const themeToApply = isValidTheme ? activeThemeValue! : DEFAULT_THEME;
-
+  const themeToApply = THEMES.some((t) => t.value === activeThemeValue) ? activeThemeValue! : DEFAULT_THEME;
   return (
-    <html lang='en' suppressHydrationWarning data-theme={themeToApply}>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                // Set meta theme color
-                if (localStorage.theme === 'dark' || ((!('theme' in localStorage) || localStorage.theme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '${META_THEME_COLORS.dark}')
-                }
-              } catch (_) {}
-            `
-          }}
-        />
-      </head>
-      <body
-        className={cn(
-          'bg-background overflow-x-hidden overscroll-none font-sans antialiased',
-          fontVariables
-        )}
-      >
+    <html lang='ar' dir='rtl' suppressHydrationWarning data-theme={themeToApply}>
+      <head><meta name='theme-color' content={META_THEME_COLORS.light} /></head>
+      <body className={cn('bg-background overflow-x-hidden overscroll-none font-sans antialiased', fontVariables)}>
         <NextTopLoader color='var(--primary)' showSpinner={false} />
         <NuqsAdapter>
-          <ThemeProvider
-            attribute='class'
-            defaultTheme='system'
-            enableSystem
-            disableTransitionOnChange
-            enableColorScheme
-          >
-            <Providers activeThemeValue={themeToApply}>
-              <Toaster />
-              {children}
-            </Providers>
+          <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange enableColorScheme>
+            <Providers activeThemeValue={themeToApply}><Toaster />{children}</Providers>
           </ThemeProvider>
         </NuqsAdapter>
       </body>
