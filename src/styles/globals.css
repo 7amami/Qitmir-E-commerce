@@ -639,3 +639,17 @@
     -webkit-text-fill-color: currentColor;
   }
 }
+
+
+/* Qitmir ERP form controls */
+.qitmir-erp { font-family: "IBM Plex Sans Arabic", "Noto Sans Arabic", Tahoma, Arial, sans-serif; }
+.qitmir-erp input, .qitmir-erp select, .qitmir-erp button { font: inherit; }
+.qitmir-erp .erp-field, .qitmir-erp .erp-select { min-height: 42px; border: 1px solid hsl(var(--border)); border-radius: 12px; background-color: hsl(var(--background)); color: hsl(var(--foreground)); padding: 9px 12px; outline: none; transition: border-color .16s ease, box-shadow .16s ease, background-color .16s ease; }
+.qitmir-erp .erp-field:focus, .qitmir-erp .erp-select:focus { border-color: #F78837; box-shadow: 0 0 0 3px rgb(247 136 55 / 16%); }
+.qitmir-erp .erp-select { cursor: pointer; font-size: 14px; font-weight: 600; }
+.qitmir-erp .erp-select option { background: hsl(var(--popover)); color: hsl(var(--popover-foreground)); font-family: "IBM Plex Sans Arabic", "Noto Sans Arabic", Tahoma, Arial, sans-serif; padding: 10px; }
+.qitmir-erp .erp-select-compact { min-height: 34px; padding: 5px 9px; font-size: 12px; }
+.qitmir-erp input[type="date"] { min-height: 44px; color-scheme: light; accent-color: #F78837; font-family: "IBM Plex Sans Arabic", "Noto Sans Arabic", Tahoma, Arial, sans-serif; font-weight: 600; }
+.dark .qitmir-erp input[type="date"] { color-scheme: dark; }
+.qitmir-erp input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; border-radius: 8px; padding: 5px; background-color: rgb(247 136 55 / 13%); }
+.qitmir-erp input[type="date"]::-webkit-datetime-edit { padding: 2px 3px; }
