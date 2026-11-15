@@ -1,20 +1,26 @@
 'use client';
 
-import { Icons } from '@/components/icons';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
 
 export function OrgSwitcher() {
   const { state } = useSidebar();
+  const collapsed = state === 'collapsed';
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <SidebarMenuButton size='lg' className='cursor-default' aria-label='Qitmir E-commerce'>
-          <div className='bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 shrink-0 items-center justify-center rounded-lg'>
-            <Icons.galleryVerticalEnd className='size-4' />
+        <SidebarMenuButton
+          size='lg'
+          className='h-14 cursor-default gap-3 px-2'
+          aria-label='Qitmir E-commerce'
+        >
+          <div className='relative flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#002432] text-[#F78837] shadow-sm ring-1 ring-[#F78837]/30'>
+            <span className='-rotate-45 text-[25px] font-black leading-none'>Q</span>
+            <span className='absolute bottom-1 right-1 size-1.5 rounded-full bg-[#F78837]' />
           </div>
-          <div className={`grid flex-1 text-left text-sm leading-tight ${state === 'collapsed' ? 'invisible max-w-0 overflow-hidden' : 'visible max-w-full'}`}>
-            <span className='truncate font-semibold'>Qitmir E-commerce</span>
-            <span className='text-muted-foreground truncate text-xs'>Workspace</span>
+          <div className={`grid min-w-0 flex-1 leading-tight ${collapsed ? 'invisible max-w-0 overflow-hidden' : 'visible max-w-full'}`}>
+            <span className='truncate text-base font-bold tracking-wide text-[#F78837]'>Qitmir</span>
+            <span className='truncate text-[11px] font-medium text-muted-foreground'>قيتمير · E-commerce ERP</span>
           </div>
         </SidebarMenuButton>
       </SidebarMenuItem>
