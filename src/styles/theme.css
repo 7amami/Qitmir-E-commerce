@@ -31,3 +31,51 @@ body {
   /* Apply font-family - will now resolve from html's [data-theme] variables */
   font-family: var(--font-sans);
 }
+
+
+/* Qitmir brand palette — orange, deep teal and soft silver */
+:root,
+[data-theme] {
+  --qitmir-orange: #F78837;
+  --qitmir-teal: #002432;
+  --qitmir-silver: #DFE4E5;
+  --primary: #F78837;
+  --primary-foreground: #002432;
+  --ring: #F78837;
+  --chart-1: #F78837;
+  --chart-2: #002432;
+  --chart-3: #8AA0A6;
+  --chart-4: #DFE4E5;
+  --chart-5: #D66C22;
+  --sidebar-primary: #F78837;
+  --sidebar-primary-foreground: #002432;
+  --sidebar-ring: #F78837;
+}
+
+[data-theme].dark {
+  --background: #002432;
+  --foreground: #DFE4E5;
+  --card: #063442;
+  --card-foreground: #DFE4E5;
+  --popover: #063442;
+  --popover-foreground: #DFE4E5;
+  --primary: #F78837;
+  --primary-foreground: #002432;
+  --secondary: #104451;
+  --secondary-foreground: #DFE4E5;
+  --muted: #103B49;
+  --muted-foreground: #A9BBC0;
+  --accent: #174B59;
+  --accent-foreground: #DFE4E5;
+  --border: #24505B;
+  --input: #24505B;
+  --ring: #F78837;
+  --sidebar: #032D3B;
+  --sidebar-foreground: #DFE4E5;
+  --sidebar-primary: #F78837;
+  --sidebar-primary-foreground: #002432;
+  --sidebar-accent: #104451;
+  --sidebar-accent-foreground: #DFE4E5;
+  --sidebar-border: #24505B;
+  --sidebar-ring: #F78837;
+}

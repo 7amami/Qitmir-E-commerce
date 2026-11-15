@@ -154,8 +154,8 @@ export default function CommerceERPPage() {
       <div className="mx-auto max-w-[1500px] space-y-6 p-4 md:p-7">
         <div className="flex flex-col justify-between gap-4 rounded-2xl border bg-card p-5 shadow-sm md:flex-row md:items-center">
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-2xl font-black text-primary-foreground">Q</div>
-            <div><p className="text-xs font-semibold tracking-widest text-muted-foreground">QITMIR · COMMERCE MANAGEMENT</p><h1 className="mt-1 text-2xl font-bold">إدارة تجارتك الإلكترونية</h1><p className="mt-1 text-sm text-muted-foreground">كل الطلبات والمخزون والمصاريف والأرباح في مكان واحد</p></div>
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#002432] text-2xl font-black text-[#F78837] ring-1 ring-[#F78837]/30">ق</div>
+            <div><p className="text-xs font-bold tracking-widest text-[#F78837]">QITMIR · قيتمير</p><h1 className="mt-1 text-2xl font-bold">إدارة تجارتك الإلكترونية</h1><p className="mt-1 text-sm text-muted-foreground">كل الطلبات والمخزون والمصاريف والأرباح في مكان واحد</p></div>
           </div>
           <div className="flex flex-wrap gap-2">
             <button onClick={exportData} className="rounded-xl border px-4 py-2 text-sm font-semibold hover:bg-muted">↓ تصدير نسخة احتياطية</button>
